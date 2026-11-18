@@ -1,0 +1,48 @@
+# Vila Palmeira Boas-vindas 2027
+
+Guia de hóspedes do Vila Palmeira Beach Resort em português e inglês. O site é estático e funciona a partir de `docs/index.html`, com CSS, JavaScript, fotografias e mapas na mesma pasta de publicação.
+
+## Pré-visualizar
+
+Pode abrir `docs/index.html` diretamente. Para testar por HTTP, execute este comando na raiz do projeto e abra [a pré-visualização local](http://127.0.0.1:8080/).
+
+```sh
+python -m http.server 8080 --bind 127.0.0.1 --directory docs
+```
+
+## Colocar no GitHub
+
+Crie um repositório vazio no GitHub. Extraia o pacote para uma pasta própria e execute os comandos a partir da pasta que contém este README. Substitua `CONTA/REPOSITORIO` pelos dados do repositório.
+
+```sh
+git init -b main
+git add -- .gitignore README.md docs
+git commit -m "Add Vila Palmeira guest guide"
+git remote add origin https://github.com/CONTA/REPOSITORIO.git
+git push -u origin main
+```
+
+## Servir num servidor
+
+Após clonar o repositório no servidor, aponte a raiz do site para a pasta `docs/` e defina `index.html` como página inicial. Se usar um alojamento com uma raiz web já configurada, envie o **conteúdo** de `docs/` para essa raiz. O site funciona num domínio próprio ou numa subpasta e dispensa Node.js, base de dados e etapa de compilação.
+
+Exemplo para um servidor Caddy. Substitua o domínio e o caminho pelos valores do alojamento.
+
+```caddyfile
+guia.example.com {
+    root * /var/www/vila-palmeira-website/docs
+    file_server
+}
+```
+
+Para disponibilizar uma atualização, publique o conteúdo atualizado de `docs/` a partir do novo commit. Confirme no endereço final que a página abre com estilos, que o seletor de idioma responde e que os mapas abrem em tamanho grande.
+
+## GitHub Pages
+
+Se preferir usar GitHub Pages, abra **Settings → Pages** no repositório. Em **Source**, escolha **Deploy from a branch**, selecione `main` e a pasta `/docs`, e guarde. [Documentação do GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)
+
+## Conteúdo e manutenção
+
+- Edite `docs/index.html` para atualizar o guia. Os atributos `data-en`, `data-en-alt` e `data-en-label` contêm as versões inglesas do texto, das descrições de imagem e dos rótulos de acessibilidade.
+- As fontes Cormorant Garamond e Jost são servidas localmente. As respetivas licenças SIL Open Font License estão em `docs/fonts/`.
+- A secção de Wi‑Fi encaminha os hóspedes para a receção para obterem a palavra-passe. O guia tem uma diretiva `noindex` para desencorajar a indexação. O controlo de acesso, se necessário, é configurado no alojamento.
