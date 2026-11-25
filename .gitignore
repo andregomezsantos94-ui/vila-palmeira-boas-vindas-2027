@@ -4,3 +4,6 @@ Desktop.ini
 .env
 .env.*
 *.zip
+
+# Locally configured guest release; may contain the Wi-Fi password.
+local-release/
